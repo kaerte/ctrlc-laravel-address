@@ -1,0 +1,54 @@
+{
+    "name": "ctrlc/address",
+    "description": "Address module",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Lukasz",
+            "email": "lukasz@ctrlc.pl"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ctrlc\\Address\\": "src/",
+            "Ctrlc\\Address\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ctrlc\\Address\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-f": "vendor/bin/phpunit --filter",
+        "phpcs-fix": "./vendor/bin/php-cs-fixer fix",
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ctrlc\\Address\\Providers\\AddressesServiceProvider",
+                "Ctrlc\\Address\\Providers\\GeoCodingServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "orchestra/testbench": "^6.4",
+        "phpunit/phpunit": "^9.4",
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}
