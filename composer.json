@@ -1,6 +1,6 @@
 {
-    "name": "ctrlc/address",
-    "description": "Address module",
+    "name": "ctrlc/laravel-address",
+    "description": "Address models with addressable",
     "type": "library",
     "authors": [
         {
