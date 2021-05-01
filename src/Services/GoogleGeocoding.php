@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Services;
 
@@ -18,7 +20,7 @@ class GoogleGeocoding implements GeocodingServiceContract
     public function reverseGeocode(string $postcode, ?string $city = ''): ?Address
     {
         try {
-            $address = trim($postcode . ' ' . $city);
+            $address = trim($postcode.' '.$city);
             $response = Http::get(self::URL, [
                 'address' => $address,
                 'key' => config('ctrlc.geocoding.google.key'),
