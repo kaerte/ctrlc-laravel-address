@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Providers;
 
@@ -13,7 +15,7 @@ class GeoCodingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__, 2) . '/config/config-geocoding.php', 'ctrlc.geocoding');
+        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/config-geocoding.php', 'ctrlc.geocoding');
         $this->app->bind(GeocodingServiceContract::class, GoogleGeocoding::class);
     }
 

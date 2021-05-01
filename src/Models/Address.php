@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Models;
 
@@ -38,47 +40,47 @@ class Address extends Model
     ];
 
     protected $casts = [
-        'addressable_id' => 'integer',
+        'addressable_id'   => 'integer',
         'addressable_type' => 'string',
-        'label' => 'string',
+        'label'            => 'string',
 
         'first_name' => 'string',
-        'surname' => 'string',
-        'line1' => 'string',
-        'line2' => 'string',
-        'line3' => 'string',
-        'postcode' => 'string',
-        'city' => 'string',
+        'surname'    => 'string',
+        'line1'      => 'string',
+        'line2'      => 'string',
+        'line3'      => 'string',
+        'postcode'   => 'string',
+        'city'       => 'string',
 
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'is_primary' => 'boolean',
-        'is_billing' => 'boolean',
+        'latitude'    => 'float',
+        'longitude'   => 'float',
+        'is_primary'  => 'boolean',
+        'is_billing'  => 'boolean',
         'is_shipping' => 'boolean',
-        'deleted_at' => 'datetime',
+        'deleted_at'  => 'datetime',
 
         'geocoding_metadata' => 'json',
     ];
 
     protected $rules = [
-        'addressable_id' => 'required|integer',
+        'addressable_id'   => 'required|integer',
         'addressable_type' => 'required|string|max:150',
 
         'label' => 'nullable|string|max:150',
 
-        'company' => 'nullable|string|max:150',
+        'company'    => 'nullable|string|max:150',
         'first_name' => 'nullable|string|max:150',
-        'surname' => 'nullable|string|max:150',
-        'line1' => 'nullable|string|max:150',
-        'line2' => 'nullable|string|max:150',
-        'line3' => 'nullable|string|max:150',
-        'postcode' => 'nullable|string|max:150',
-        'city' => 'nullable|string|max:150',
+        'surname'    => 'nullable|string|max:150',
+        'line1'      => 'nullable|string|max:150',
+        'line2'      => 'nullable|string|max:150',
+        'line3'      => 'nullable|string|max:150',
+        'postcode'   => 'nullable|string|max:150',
+        'city'       => 'nullable|string|max:150',
 
-        'latitude' => 'nullable|numeric',
-        'longitude' => 'nullable|numeric',
-        'is_primary' => 'sometimes|boolean',
-        'is_billing' => 'sometimes|boolean',
+        'latitude'    => 'nullable|numeric',
+        'longitude'   => 'nullable|numeric',
+        'is_primary'  => 'sometimes|boolean',
+        'is_billing'  => 'sometimes|boolean',
         'is_shipping' => 'sometimes|boolean',
 
     ];
@@ -162,18 +164,18 @@ class Address extends Model
 
     public function getFullNameAttribute(): string
     {
-        return $this->first_name . ' ' . $this->surname;
+        return $this->first_name.' '.$this->surname;
     }
 
     private function getAddressAsString($separator = ', ')
     {
         $str = '';
-        $str .= $this->line1 . $separator;
-        $str .= $this->line2 . $separator;
+        $str .= $this->line1.$separator;
+        $str .= $this->line2.$separator;
         if ($this->line3) {
-            $str .= $this->line3 . $separator;
+            $str .= $this->line3.$separator;
         }
-        $str .= $this->postcode . $separator;
+        $str .= $this->postcode.$separator;
         $str .= $this->country->name;
 
         return $str;

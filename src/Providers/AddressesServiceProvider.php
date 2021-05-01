@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Providers;
 
@@ -8,7 +10,7 @@ class AddressesServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__, 2) . '/config/config.php', 'ctrlc.address');
+        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/config.php', 'ctrlc.address');
     }
 
     public function boot()

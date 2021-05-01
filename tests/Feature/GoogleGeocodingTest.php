@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Tests\Feature;
 
@@ -25,9 +27,9 @@ class GoogleGeocodingTest extends TestCase
 
     public function test_ok(): void
     {
-        $response = file_get_contents(__DIR__ . '../../__mocks/responses/google/OK.json');
+        $response = file_get_contents(__DIR__.'../../__mocks/responses/google/OK.json');
         Http::fake([
-            GoogleGeocoding::URL. '*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
+            GoogleGeocoding::URL.'*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
         ]);
         $address = $this->service->reverseGeocode('K1M 1M4');
         $this->verifyAddress($address);
@@ -35,9 +37,9 @@ class GoogleGeocodingTest extends TestCase
 
     public function test_zero_results()
     {
-        $response = file_get_contents(__DIR__ . '../../__mocks/responses/google/ZERO_RESULTS.json');
+        $response = file_get_contents(__DIR__.'../../__mocks/responses/google/ZERO_RESULTS.json');
         Http::fake([
-            GoogleGeocoding::URL. '*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
+            GoogleGeocoding::URL.'*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
         ]);
 
         $address = $this->service->reverseGeocode('K1M 1M4');
@@ -46,9 +48,9 @@ class GoogleGeocodingTest extends TestCase
 
     public function test_invalid_request()
     {
-        $response = file_get_contents(__DIR__ . '../../__mocks/responses/google/INVALID_REQUEST.json');
+        $response = file_get_contents(__DIR__.'../../__mocks/responses/google/INVALID_REQUEST.json');
         Http::fake([
-            GoogleGeocoding::URL. '*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
+            GoogleGeocoding::URL.'*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
         ]);
 
         $address = $this->service->reverseGeocode('K1M 1M4');
@@ -59,9 +61,9 @@ class GoogleGeocodingTest extends TestCase
     {
         Event::fake();
 
-        $response = file_get_contents(__DIR__ . '../../__mocks/responses/google/QUERY_DAILY_LIMIT.json');
+        $response = file_get_contents(__DIR__.'../../__mocks/responses/google/QUERY_DAILY_LIMIT.json');
         Http::fake([
-            GoogleGeocoding::URL. '*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
+            GoogleGeocoding::URL.'*' => Http::response($response, 200, ['Content-Type' => 'application/json; charset=UTF-8']),
         ]);
 
         $address = $this->service->reverseGeocode('K1M 1M4');

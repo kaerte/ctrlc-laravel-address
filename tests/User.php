@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ctrlc\Address\Tests;
 
@@ -9,7 +11,9 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasAddresses, HasFactory, Notifiable;
+    use HasAddresses;
+    use HasFactory;
+    use Notifiable;
 
     protected $guarded = [];
 
