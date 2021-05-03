@@ -277,6 +277,6 @@ class CreateCountriesTable extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists(config('ctrlc.address.table_name'));
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 }
