@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ctrlc\Address\Tests;
 
-use Ctrlc\Address\Traits\HasAddresses;
+use Ctrlc\Address\Traits\Addressable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasAddresses;
+    use Addressable;
     use HasFactory;
     use Notifiable;
 

@@ -8,7 +8,7 @@ use Ctrlc\Address\Models\Address;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-trait HasAddresses
+trait Addressable
 {
     public function addresses(): MorphMany
     {
