@@ -17,6 +17,13 @@ class Address extends Model
 
     protected $with = ['country'];
 
+    protected $hidden = [
+        'addressable_type',
+        'addressable_id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'addressable_id',
         'addressable_type',
@@ -40,57 +47,27 @@ class Address extends Model
     ];
 
     protected $casts = [
-        'addressable_id'   => 'integer',
+        'addressable_id' => 'integer',
         'addressable_type' => 'string',
-        'label'            => 'string',
+        'label' => 'string',
 
         'first_name' => 'string',
-        'surname'    => 'string',
-        'line_1'      => 'string',
-        'line_2'      => 'string',
-        'line_3'      => 'string',
-        'postcode'   => 'string',
-        'city'       => 'string',
+        'surname' => 'string',
+        'line_1' => 'string',
+        'line_2' => 'string',
+        'line_3' => 'string',
+        'postcode' => 'string',
+        'city' => 'string',
 
-        'latitude'    => 'float',
-        'longitude'   => 'float',
-        'is_primary'  => 'boolean',
-        'is_billing'  => 'boolean',
+        'latitude' => 'float',
+        'longitude' => 'float',
+        'is_primary' => 'boolean',
+        'is_billing' => 'boolean',
         'is_shipping' => 'boolean',
-        'deleted_at'  => 'datetime',
+        'deleted_at' => 'datetime',
 
         'geocoding_metadata' => 'json',
         'geocoding_provider' => 'string'
-    ];
-
-    protected $rules = [
-        'addressable_id'   => 'required|integer',
-        'addressable_type' => 'required|string|max:150',
-
-        'label' => 'nullable|string|max:150',
-
-        'company'    => 'nullable|string|max:150',
-        'first_name' => 'nullable|string|max:150',
-        'surname'    => 'nullable|string|max:150',
-        'line1'      => 'nullable|string|max:150',
-        'line2'      => 'nullable|string|max:150',
-        'line3'      => 'nullable|string|max:150',
-        'postcode'   => 'nullable|string|max:150',
-        'city'       => 'nullable|string|max:150',
-
-        'latitude'    => 'nullable|numeric',
-        'longitude'   => 'nullable|numeric',
-        'is_primary'  => 'sometimes|boolean',
-        'is_billing'  => 'sometimes|boolean',
-        'is_shipping' => 'sometimes|boolean',
-
-    ];
-
-    protected $hidden = [
-        'addressable_type',
-        'addressable_id',
-        'created_at',
-        'updated_at',
     ];
 
     public function addressable(): MorphTo
@@ -165,18 +142,18 @@ class Address extends Model
 
     public function getFullNameAttribute(): string
     {
-        return $this->first_name.' '.$this->surname;
+        return $this->first_name . ' ' . $this->surname;
     }
 
     private function getAddressAsString($separator = ', ')
     {
         $str = '';
-        $str .= $this->line_1.$separator;
-        $str .= $this->line_2.$separator;
+        $str .= $this->line_1 . $separator;
+        $str .= $this->line_2 . $separator;
         if ($this->line_3) {
-            $str .= $this->line_3.$separator;
+            $str .= $this->line_3 . $separator;
         }
-        $str .= $this->postcode.$separator;
+        $str .= $this->postcode . $separator;
         $str .= $this->country->name;
 
         return $str;
