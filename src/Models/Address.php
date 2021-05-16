@@ -24,9 +24,9 @@ class Address extends Model
         'label',
         'first_name',
         'surname',
-        'line1',
-        'line2',
-        'line3',
+        'line_1',
+        'line_2',
+        'line_3',
         'postcode',
         'city',
         'latitude',
@@ -46,9 +46,9 @@ class Address extends Model
 
         'first_name' => 'string',
         'surname'    => 'string',
-        'line1'      => 'string',
-        'line2'      => 'string',
-        'line3'      => 'string',
+        'line_1'      => 'string',
+        'line_2'      => 'string',
+        'line_3'      => 'string',
         'postcode'   => 'string',
         'city'       => 'string',
 
@@ -60,6 +60,7 @@ class Address extends Model
         'deleted_at'  => 'datetime',
 
         'geocoding_metadata' => 'json',
+        'geocoding_provider' => 'string'
     ];
 
     protected $rules = [
@@ -170,10 +171,10 @@ class Address extends Model
     private function getAddressAsString($separator = ', ')
     {
         $str = '';
-        $str .= $this->line1.$separator;
-        $str .= $this->line2.$separator;
-        if ($this->line3) {
-            $str .= $this->line3.$separator;
+        $str .= $this->line_1.$separator;
+        $str .= $this->line_2.$separator;
+        if ($this->line_3) {
+            $str .= $this->line_3.$separator;
         }
         $str .= $this->postcode.$separator;
         $str .= $this->country->name;

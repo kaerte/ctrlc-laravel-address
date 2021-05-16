@@ -75,9 +75,9 @@ class GoogleGeocodingTest extends TestCase
     private function verifyAddress(Address $address)
     {
         self::assertInstanceOf(Address::class, $address);
-        self::assertEquals('24', $address->line1);
-        self::assertEquals('Sussex Drive', $address->line2);
-        self::assertEquals('Ottawa', $address->line3);
+        self::assertEquals('24', $address->line_1);
+        self::assertEquals('Sussex Drive', $address->line_2);
+        self::assertEquals('Ottawa', $address->line_3);
         self::assertEquals('Ontario', $address->city);
         self::assertEquals('K1M 1M4', $address->postcode);
         self::assertEquals('CA', $address->country->iso_2);

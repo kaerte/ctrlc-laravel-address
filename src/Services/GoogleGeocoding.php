@@ -51,9 +51,9 @@ class GoogleGeocoding implements GeocodingServiceContract
         $country = $this->getKeyFromAddressComponents($address_components, 'country')?->short_name;
 
         return new Address([
-            'line1' => $this->getKeyFromAddressComponents($address_components, 'street_number')?->long_name,
-            'line2' => $this->getKeyFromAddressComponents($address_components, 'route')?->long_name,
-            'line3' => $this->getKeyFromAddressComponents($address_components, 'locality')?->long_name,
+            'line_1' => $this->getKeyFromAddressComponents($address_components, 'street_number')?->long_name,
+            'line_2' => $this->getKeyFromAddressComponents($address_components, 'route')?->long_name,
+            'line_3' => $this->getKeyFromAddressComponents($address_components, 'locality')?->long_name,
             'postcode' => $this->getKeyFromAddressComponents($address_components, 'postal_code')?->long_name,
             'city' => $this->getKeyFromAddressComponents($address_components, 'administrative_area_level_1')?->long_name,
             'country_id' => Country::where('iso_2', $country)->firstOrFail()->id,

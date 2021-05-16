@@ -18,9 +18,10 @@ class CreateAddressesTable extends Migration
             $table->string('company')->nullable();
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
-            $table->string('line1')->nullable();
-            $table->string('line2')->nullable();
-            $table->string('line3')->nullable();
+
+            $table->string('line_1')->nullable();
+            $table->string('line_2')->nullable();
+            $table->string('line_3')->nullable();
             $table->string('postcode', 50)->nullable();
             $table->string('city', 80)->nullable();
             $table->foreignIdFor(Country::class)->constrained();
