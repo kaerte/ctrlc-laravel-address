@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Ctrlc\Address\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,31 +12,22 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->nullableMorphs('addressable');
-            $table->string('label')->nullable();
-            $table->string('company')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('surname')->nullable();
-
-            $table->string('line_1')->nullable();
-            $table->string('line_2')->nullable();
-            $table->string('line_3')->nullable();
-            $table->string('postcode', 50)->nullable();
-            $table->string('city', 80)->nullable();
-            $table->foreignIdFor(Country::class)->constrained();
-
-            $table->decimal('latitude', 10, 7)->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
-
-            $table->boolean('is_primary')->default(false);
-            $table->boolean('is_billing')->default(false);
-            $table->boolean('is_shipping')->default(false);
-
-            $table->json('geocoding_metadata')->nullable();
-            $table->string('geocoding_provider')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
+            $table->nullableMorphs('addressable');
+            $table->string('first_name', 255)->nullable();
+            $table->string('last_name', 255)->nullable();
+            $table->string('company', 255)->nullable();
+            $table->string('address1');
+            $table->string('address2')->nullable();
+            $table->string('city', 100);
+            $table->string('state_or_province', 100)->nullable();
+            $table->string('postal_code', 30);
+            $table->string('country_code', 2)->index();
+            $table->string('phone', 50)->nullable();
+            $table->boolean('is_primary')->default(true);
+            $table->boolean('is_billing')->default(false);
+            $table->boolean('is_shipping')->default(false);
         });
     }
 
