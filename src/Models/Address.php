@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ctrlc\Address\Models;
 
 use Ctrlc\Address\Database\Factories\AddressFactory;
+use Ctrlc\Address\Traits\HasGeocoding;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,8 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Address extends Model
 {
     use HasFactory;
-
-    protected $with = ['country'];
+    use HasGeocoding;
 
     protected $hidden = [
         'addressable_type',
@@ -27,47 +27,41 @@ class Address extends Model
     protected $fillable = [
         'addressable_id',
         'addressable_type',
-        'country_id',
-        'label',
+
         'first_name',
-        'surname',
-        'line_1',
-        'line_2',
-        'line_3',
-        'postcode',
+        'last_name',
+        'company',
+        'address1',
+        'address2',
         'city',
-        'latitude',
-        'longitude',
+        'state_or_province',
+        'postal_code',
+        'country_code',
+        'phone',
+
         'is_primary',
         'is_billing',
         'is_shipping',
-
-        'geocoding_metadata',
-        'geocoding_provider',
     ];
 
     protected $casts = [
         'addressable_id' => 'integer',
         'addressable_type' => 'string',
-        'label' => 'string',
 
         'first_name' => 'string',
-        'surname' => 'string',
-        'line_1' => 'string',
-        'line_2' => 'string',
-        'line_3' => 'string',
-        'postcode' => 'string',
+        'last_name' => 'string',
+        'company' => 'string',
+        'address1' => 'string',
+        'address2' => 'string',
         'city' => 'string',
+        'state_or_province' => 'string',
+        'postal_code' => 'string',
+        'country_code' => 'string',
+        'phone' => 'string',
 
-        'latitude' => 'float',
-        'longitude' => 'float',
         'is_primary' => 'boolean',
         'is_billing' => 'boolean',
         'is_shipping' => 'boolean',
-        'deleted_at' => 'datetime',
-
-        'geocoding_metadata' => 'json',
-        'geocoding_provider' => 'string'
     ];
 
     public function addressable(): MorphTo
@@ -77,7 +71,7 @@ class Address extends Model
 
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class, 'country_code', 'iso_2');
     }
 
     public function makePrimary(): Address
@@ -123,8 +117,6 @@ class Address extends Model
         return $builder->where('country_code', $countryCode);
     }
 
-    //
-
     public function getHtmlAddressAttribute(): string
     {
         return $this->getAddressAsString('<br>');
@@ -142,7 +134,7 @@ class Address extends Model
 
     public function getFullNameAttribute(): string
     {
-        return $this->first_name . ' ' . $this->surname;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     private function getAddressAsString($separator = ', ')
@@ -157,6 +149,11 @@ class Address extends Model
         $str .= $this->country->name;
 
         return $str;
+    }
+
+    public function __toString()
+    {
+        return $this->getAddressAsString();
     }
 
     protected static function newFactory(): AddressFactory

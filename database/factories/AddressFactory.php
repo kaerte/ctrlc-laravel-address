@@ -15,22 +15,15 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'label'      => $this->faker->colorName.' address',
             'first_name' => $this->faker->firstName,
-            'surname'    => $this->faker->lastName,
-            'line_1'      => $this->faker->countryISOAlpha3,
-            'line_2'      => $this->faker->address,
-            'line_3'      => $this->faker->city,
-            'postcode'   => $this->faker->postcode,
-            'city'       => $this->faker->city,
-            'country_id' => Country::inRandomOrder()->first()->id,
-
-            'latitude'  => $this->faker->latitude,
-            'longitude' => $this->faker->longitude,
-
-            'is_primary'  => $this->faker->boolean,
-            'is_billing'  => $this->faker->boolean,
-            'is_shipping' => $this->faker->boolean,
+            'last_name' => $this->faker->lastName,
+            'company' => $this->faker->company,
+            'address1' => $this->faker->streetName,
+            'address2' => $this->faker->streetAddress,
+            'state_or_province' => $this->faker->city,
+            'city' => $this->faker->city,
+            'postal_code' => $this->faker->postcode,
+            'country_code' => Country::inRandomOrder()->first()->iso_2,
         ];
     }
 }
