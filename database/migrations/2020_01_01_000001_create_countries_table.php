@@ -15,8 +15,8 @@ class CreateCountriesTable extends Migration
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('iso_2', 10);
-            $table->string('iso_3', 10);
+            $table->string('iso_2', 2);
+            $table->string('iso_3', 3);
             $table->integer('order')->default(999);
             $table->timestamps();
         });
