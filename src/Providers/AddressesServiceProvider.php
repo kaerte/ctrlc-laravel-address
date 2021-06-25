@@ -17,5 +17,6 @@ class AddressesServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations/2020_01_01_000001_create_countries_table.php');
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations/2020_01_01_000002_create_addresses_table.php');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations/2020_01_01_000003_create_geocodings_table.php');
     }
 }
