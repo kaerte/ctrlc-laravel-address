@@ -18,7 +18,7 @@ class CreateAddressesTable extends Migration
             $table->string('first_name', 255)->nullable();
             $table->string('last_name', 255)->nullable();
             $table->string('company', 255)->nullable();
-            $table->string('address1');
+            $table->string('address1')->nullable();
             $table->string('address2')->nullable();
             $table->string('city', 100);
             $table->string('state_or_province', 100)->nullable();
