@@ -10,7 +10,7 @@ class AddressesServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/config.php', 'ctrlc.address');
+        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/address.php', 'address');
     }
 
     public function boot()

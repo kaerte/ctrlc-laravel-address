@@ -25,7 +25,6 @@ class GeocodingHelpers
         return match ($unit) {
             'kilometers' => number_format(($miles * 1.609344), 2),
             'nautical-miles' => number_format(($miles * 0.8684), 2),
-            //miles
             'miles' => number_format($miles, 2),
             default => throw new InvalidArgumentException('Invalid distance unit')
         };

@@ -22,7 +22,7 @@ class GoogleGeocoding implements GeocodingServiceContract
             $address = trim($postcode.' '.$city);
             $response = Http::get(self::URL, [
                 'address' => $address,
-                'key' => config('ctrlc.geocoding.google.key'),
+                'key' => config('geocoding.google.key'),
             ]);
 
             $body = json_decode($response->body(), false, 20, JSON_THROW_ON_ERROR);
@@ -32,6 +32,7 @@ class GoogleGeocoding implements GeocodingServiceContract
                 'ZERO_RESULTS' => throw new AddressNotFoundException($address),
                 'INVALID_REQUEST', 'REQUEST_DENIED', 'UNKNOWN_ERROR' => throw new ApiException($body->status),
                 'OVER_DAILY_LIMIT', 'OVER_QUERY_LIMIT' => throw new ApiLimitException($body->status),
+                default => throw new ApiException($body->status)
             };
         } catch (AddressNotFoundException | ApiException | ApiLimitException | JsonException $e) {
             report($e);

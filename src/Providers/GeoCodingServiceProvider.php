@@ -15,7 +15,7 @@ class GeoCodingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/config-geocoding.php', 'ctrlc.geocoding');
+        $this->mergeConfigFrom(dirname(__DIR__, 2).'/config/geocoding.php', 'geocoding');
         $this->app->bind(GeocodingServiceContract::class, GoogleGeocoding::class);
     }
 
@@ -26,6 +26,9 @@ class GeoCodingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            dirname(__DIR__, 2).'/config/geocoding.php' => config_path('geocoding.php'),
+        ], 'ctrlc.geocoding');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'ctrlc_geocoding');
     }
 }
