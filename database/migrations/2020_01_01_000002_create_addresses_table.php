@@ -25,7 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('postal_code', 30);
             $table->string('country_code', 2)->index();
             $table->string('phone', 50)->nullable();
-            $table->boolean('is_primary')->default(true);
+            $table->boolean('is_primary')->default(false);
             $table->boolean('is_billing')->default(false);
             $table->boolean('is_shipping')->default(false);
         });
